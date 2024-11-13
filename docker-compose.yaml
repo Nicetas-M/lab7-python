@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:13
+    container_name: postgres_container
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: clinic_db
+    ports:
+      - "8054:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    networks:
+      - clinic_network
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - clinic_network
+
+networks:
+  clinic_network:
+    driver: bridge
